@@ -1,0 +1,8 @@
+import pandas as pd
+import numpy as np # Import the numpy package into your workspace
+import matplotlib.pyplot as plt # Import matplotlib into your workspace
+
+df = pd.read_csv('./data/airbnb_hw.csv',low_memory=False)
+print(df.shape, '\n') # List the dimensions of df
+print(df.dtypes, '\n') # The types of the variables; `object` is a bad sign
+print(df.columns, '\n') # Column names
