@@ -1,3 +1,5 @@
+# QUESTION 2
+
 #!/usr/bin/env python3
 import pandas as pd
 import numpy as np # Import the numpy package into your workspace
@@ -52,3 +54,51 @@ print(df3.shape, '\n') # List the dimensions of df3
 df3['WhetherDefendantWasReleasedPretrial'] = df3['WhetherDefendantWasReleasedPretrial'].fillna(np.nan) # replaces null values of WhetherDefendantWasReleasedPretrial
 whetherrelease = df3['WhetherDefendantWasReleasedPretrial']
 print(whetherrelease.unique())
+
+# 4.
+#
+#
+#
+
+# QUESTION 3
+
+# 1. How did the most recent US Census gather data on race? 
+      # --> The US census gathers racial demographic data based on self-reporting.
+
+# 2. Why do we gather these data? What role do these kinds of data play in politics and society? Why does data quality matter? 
+      # --> Census data helps to inform social policy and funding allocation strategies. For instance, if the census identifies that a large
+      # number of Americans are youth or elderly, then this might influence funding allocations to childcare or social security. Additionally, 
+      # Census data is used to calculate the number of representives needed for local and state governments. Data 
+      # quality is important because social groups and agencies need accurate data in order to inform their strategies.
+
+# 3. Please provide a constructive criticism of how the Census was conducted: What was done well? What do you think was missing? 
+# How should future large scale surveys be adjusted to best reflect the diversity of the population? Could some of the Census' 
+# good practices be adopted more widely to gather richer and more useful data?
+      # --> Audits discovered that the Census over- and under-counted multiple state populations populations, as well as counts for certain 
+      # racial groups (including hispanics). One measure used by the Census, called the post-enumeration survey, excludes group housing 
+      # locations such as dorms and prisons from its sample, which could lead to possible undercounting. However, the Census does 
+      # incorporate multiple forms of sampling (including a survey portion and a portion which utilizes birth and death records). This 
+      # multi-analysis framework could be applied to other large sample surveys. In order to fully incorporate demographic diversity within
+      # sample results, Census data scientists should ensure that all US communities are reached by the census porportionally, through 
+      # modes such as mail, phone, and door-to-door sampling. If some demographics are harder to reach through these sampling methods, then
+      # the census should alter their methods to ensure that sampling modes are accessible.
+
+# 4. How did the Census gather data on sex and gender? Please provide a similar constructive criticism of their practices.
+      # --> The Census prompts survey participants to identify their sex (with options of male and female). This question design excludes
+      # individuals who are intersex, trans, and nonbinary. In the future, additional questions could be added which allow participants to
+      # identify their gender identity.
+
+#5. When it comes to cleaning data, what concerns do you have about protected characteristics like sex, gender, sexual identity, 
+# or race? What challenges can you imagine arising when there are missing values? What good or bad practices might people adopt, and why?
+      # --> During the cleaning process, information such as secondary racial identities might be removed from a participant's profile
+      # for the sake of categorization. For instance, even if a person has partial Native American ancestory, their racial profile
+      # in the census could ommit this information. On an aggregate level, this could result in undercounting of minority groups, which
+      # affects the amount of services that groups receive. Furthermore, if characteritics such as sex or gender identity are missing 
+      # from samples, data scientists might either ommit these data points or replace them with predictions. For instance, if an 
+      # intersex person chose not to list their sex on the census, then their response would be listed as null, which is nondescriptive 
+      # of their actual sex.
+
+#6. Suppose someone invented an algorithm to impute values for protected characteristics like race, gender, sex, or sexuality. 
+# What kinds of concerns would you have?
+      # This algorithm might inaccurately apply other data listed about the subject (such as their income or residence) to make 
+      # a judgement on their expected race or gender. This could lead to misrepresentation of overall demographics.
