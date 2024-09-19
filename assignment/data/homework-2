@@ -1,8 +1,54 @@
+#!/usr/bin/env python3
 import pandas as pd
 import numpy as np # Import the numpy package into your workspace
 import matplotlib.pyplot as plt # Import matplotlib into your workspace
 
-df = pd.read_csv('./data/airbnb_hw.csv',low_memory=False)
+df = pd.read_csv('assignment/data/airbnb_hw.csv',low_memory=False)
 print(df.shape, '\n') # List the dimensions of df
-print(df.dtypes, '\n') # The types of the variables; `object` is a bad sign
-print(df.columns, '\n') # Column names
+print(df.head(n=100))
+
+# 1. clean the price column
+price = df['Price'] # creates a data frame with all values of the price variable
+print(price.unique()) # prints all of the unique values within the price dataframe
+
+# drop null values
+count_before_drop = len(df)
+df = df.dropna(subset=['Price'])
+count_after_drop = len(df)
+print( "count before drop: \n", count_before_drop)
+print( "count after drop: \n", count_after_drop)
+# no null values
+
+# remove commas from prices
+df['new_prices'] = pd.to_numeric(df['Price'], errors='coerce') # Coerce the variable to numeric
+# Create a missing dummy:
+df['price_nan'] = df['Price'].isnull() # Equals 1 if missing, 0 if non-null
+# After coercion:
+print('After coercion: \n', df['Price'].describe(),'\n') # Describe the numeric variable
+print('Total Missings: \n', sum(df['price_nan']),'\n') # How many missing values are there? Apparently 0
+new_prices = df['new_prices'] 
+print(new_prices.unique())
+
+# 2. clean the "type" variable in the shark dataset
+df2 = pd.read_csv('assignment/data/sharks.csv', low_memory=False)
+print(df.shape, '\n') # List the dimensions of df
+print(df2.head(n=100))
+
+type = df2['Type']
+print(type.unique()) # see the unique values. It looks like some are null, so drop those occurances
+
+# drop null values
+typecount_before_drop = len(df2)
+df2 = df2.dropna(subset=['Type'])
+typecount_after_drop = len(df2)
+print( "count before drop: \n", typecount_before_drop) # returned 6462
+print( "count after drop: \n", typecount_after_drop) # returned 6457 (meaning that 5 values of type were null, and were thus droppe
+
+# 3. For the pretrial data, clean the WhetherDefendantWasReleasedPretrial variable & replace 
+# missing values with np.nan
+
+df3 = pd.read_csv('pretrial_data.csv',low_memory=False)
+print(df3.shape, '\n') # List the dimensions of df3
+df3['WhetherDefendantWasReleasedPretrial'] = df3['WhetherDefendantWasReleasedPretrial'].fillna(np.nan) # replaces null values of WhetherDefendantWasReleasedPretrial
+whetherrelease = df3['WhetherDefendantWasReleasedPretrial']
+print(whetherrelease.unique())
