@@ -51,14 +51,39 @@ print( "count after drop: \n", typecount_after_drop) # returned 6457 (meaning th
 
 df3 = pd.read_csv('pretrial_data.csv',low_memory=False)
 print(df3.shape, '\n') # List the dimensions of df3
-df3['WhetherDefendantWasReleasedPretrial'] = df3['WhetherDefendantWasReleasedPretrial'].fillna(np.nan) # replaces null values of WhetherDefendantWasReleasedPretrial
+df3 = df.rename(columns = {'WhetherDefendantWasReleasedPretrial':'whether_release'})
+df3['whether_release'] = df3['whether_release'].fillna(np.nan) # replaces null values of WhetherDefendantWasReleasedPretrial
 whetherrelease = df3['WhetherDefendantWasReleasedPretrial']
 print(whetherrelease.unique())
 
+
 # 4.
-#
-#
-#
+df = pd.read_csv('pretrial_data.csv',low_memory=False)
+print(df.shape, '\n') # List the dimensions of df
+print(df.head(n=100))
+
+# CLEAN
+df_new = df.rename(columns = {'ImposedSentenceAllChargeInContactEvent':'Imposed'}) # RENAME THE VARIABLE
+print(df_new.head(n=100)) # CHECK TO SEE IF IT WORKED
+imposed = df_new['Imposed'] # create dataframe with just 1 var
+print(imposed.unique()) # check to see unique values -- > see if anything sticks out
+# i notice that at least one value is an empty string, and also some numbers have a decimal that seems too long for our purposes
+# drop null values:
+count_before_drop = len(df_new)
+df_new = df_new.dropna(subset=['Imposed'])
+count_after_drop = len(df_new)
+imposed = df_new['Imposed']
+print( "count before drop: \n", count_before_drop)
+print( "count after drop: \n", count_after_drop)
+# since this didn't do anything, now drop values that are equal to a single space
+count_before_drop = len(df_new) # take inital count of the length of the dataframe
+df_new['Imposed'] = df_new['Imposed'].replace(' ', np.nan) # replace values " " with np.nan
+df_new = df.dropna() # drop null values
+
+print(df_new.head(n=100)) # print the new dataframe
+print( "count before drop: \n", count_before_drop) # print counts and compare 
+print( "count after drop: \n", count_after_drop) # looks like a lot of values were dropped. If i did this right, it means that a lot of values were spaces
+
 
 # QUESTION 3
 
